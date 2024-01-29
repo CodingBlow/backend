@@ -22,12 +22,15 @@ const Form = mongoose.model("Form", formSchema);
 
 const server = express();
 
+// Enable CORS for all routes
 server.use(cors());
+
+// Parse JSON requests
 server.use(bodyParser.json());
 
 server.get("/", (req, res) => {
   res.send("Hello World");
-})
+});
 
 server.post("/form", async (req, res) => {
   try {
@@ -45,6 +48,9 @@ server.post("/form", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+// Set CORS headers for the preflight OPTIONS request
+server.options("/form", cors());
 
 server.listen(process.env.PORT, () => {
   console.log("Server started on port 5000");
