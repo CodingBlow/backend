@@ -25,6 +25,10 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.json());
 
+server.get("/", (req, res) => {
+  res.send("Hello World");
+})
+
 server.post("/form", async (req, res) => {
   try {
     let formData = new Form();
